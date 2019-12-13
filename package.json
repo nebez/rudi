@@ -4,6 +4,8 @@
   "description": "An opinionated dependency injector container written in TypeScript for TypeScript developers",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint --ext \".ts\" \"./src\"",
+    "lint:fix": "eslint --fix --ext \".ts\" \"./src\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,5 +25,14 @@
   "bugs": {
     "url": "https://github.com/nebez/rudi/issues"
   },
-  "homepage": "https://github.com/nebez/rudi#readme"
+  "homepage": "https://github.com/nebez/rudi#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.11.0",
+    "@typescript-eslint/parser": "^2.11.0",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.3"
+  }
 }
