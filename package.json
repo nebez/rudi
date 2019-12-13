@@ -1,0 +1,27 @@
+{
+  "name": "rudi-ts",
+  "version": "0.1.0",
+  "description": "An opinionated dependency injector container written in TypeScript for TypeScript developers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nebez/rudi.git"
+  },
+  "keywords": [
+    "typescript",
+    "dependency",
+    "inversion",
+    "injection",
+    "di",
+    "ts"
+  ],
+  "author": "Nebez Briefkani <me@nebezb.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/nebez/rudi/issues"
+  },
+  "homepage": "https://github.com/nebez/rudi#readme"
+}
