@@ -10,9 +10,9 @@
     "build:es2015": "tsc -p ./typescript/tsconfig.esm2015.json",
     "build:types": "tsc -p ./typescript/tsconfig.types.json",
     "clean": "rimraf ./dist",
-    "lint": "eslint --ext \".ts\" \"./src\"",
-    "lint:fix": "eslint --fix --ext \".ts\" \"./src\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --ext \".ts\" \"./src\" \"./test\"",
+    "lint:fix": "eslint --fix --ext \".ts\" \"./src\" \"./test\"",
+    "test": "jest ./test/*"
   },
   "repository": {
     "type": "git",
@@ -33,13 +33,42 @@
   },
   "homepage": "https://github.com/nebez/rudi#readme",
   "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.17",
     "@typescript-eslint/eslint-plugin": "^2.11.0",
     "@typescript-eslint/parser": "^2.11.0",
     "eslint": "^6.7.2",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.1",
+    "jest": "^24.9.0",
     "prettier": "^1.19.1",
+    "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
+    "ts-jest": "^24.2.0",
     "typescript": "^3.7.3"
+  },
+  "jest": {
+    "rootDir": ".",
+    "clearMocks": true,
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": ["src/**/*.ts"],
+    "coveragePathIgnorePatterns": [
+      "/dist/",
+      "/node_modules/",
+      "types\\.ts",
+      "index\\.ts",
+      ".+\\.d\\.ts"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "./typescript/tsconfig.test.json"
+      }
+    },
+    "moduleFileExtensions": ["ts", "js"],
+    "setupFilesAfterEnv": ["<rootDir>/test/setup.ts"],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testEnvironment": "node"
   }
 }
