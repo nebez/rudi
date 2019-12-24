@@ -63,6 +63,9 @@ const myLogger2 = new ConsoleLogger();
 container.register(Logger, myLogger);
 container.register(Logger, myLogger2);
 
+container.register(ConsoleLogger, myLogger);
+container.register(ConsoleLogger, myLogger2);
+
 /**
  * These should not be fine.
  */
@@ -89,3 +92,5 @@ container.register(Logger, myLogger2).resolutionScope();
 // You can't attach a wrong shape to an abstraction.
 const myBadLogger = { log: (message: string[]) => { console.error(message); } };
 container.register(Logger, myBadLogger);
+container.register(ConsoleLogger, myBadLogger);
+container.register(Car, myBadLogger);
