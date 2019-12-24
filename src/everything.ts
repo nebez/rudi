@@ -10,8 +10,11 @@ interface Scope {
     resolutionScope(): void;
 }
 
+type FactoryFunction<T> = (container: Container) => T;
+
 export interface Container {
     register<To>(to: Newable<To>): Scope;
     register<From, To extends From>(from: Abstraction<From>, to: Newable<To>): Scope;
     register<From, To extends From>(from: Abstraction<From>, to: To): void;
+    register<From, To extends From>(from: Abstraction<From>, to: FactoryFunction<To>): Scope;
 }

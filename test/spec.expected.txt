@@ -1,71 +1,140 @@
-test/spec.ts(74,25): error TS2769: No overload matches this call.
-  Overload 1 of 3, '(from: Abstraction<Car>, to: Newable<Car>): Scope', gave the following error.
+test/spec.ts(99,25): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(from: Abstraction<Car>, to: Newable<Car>): Scope', gave the following error.
     Argument of type 'typeof ConsoleLogger' is not assignable to parameter of type 'Newable<Car>'.
       Property 'drive' is missing in type 'ConsoleLogger' but required in type 'Car'.
-  Overload 2 of 3, '(from: Abstraction<Car>, to: Car): void', gave the following error.
+  Overload 2 of 4, '(from: Abstraction<Car>, to: Car): void', gave the following error.
     Argument of type 'typeof ConsoleLogger' is not assignable to parameter of type 'Car'.
       Property 'drive' is missing in type 'typeof ConsoleLogger' but required in type 'Car'.
-test/spec.ts(75,35): error TS2769: No overload matches this call.
-  Overload 1 of 3, '(from: Abstraction<ConsoleLogger>, to: Newable<ConsoleLogger>): Scope', gave the following error.
+  Overload 3 of 4, '(from: Abstraction<Car>, to: FactoryFunction<Car>): Scope', gave the following error.
+    Argument of type 'typeof ConsoleLogger' is not assignable to parameter of type 'FactoryFunction<Car>'.
+      Type 'typeof ConsoleLogger' provides no match for the signature '(container: Container): Car'.
+test/spec.ts(100,35): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(from: Abstraction<ConsoleLogger>, to: Newable<ConsoleLogger>): Scope', gave the following error.
     Argument of type 'typeof Car' is not assignable to parameter of type 'Newable<ConsoleLogger>'.
       Property 'log' is missing in type 'Car' but required in type 'ConsoleLogger'.
-  Overload 2 of 3, '(from: Abstraction<ConsoleLogger>, to: ConsoleLogger): void', gave the following error.
+  Overload 2 of 4, '(from: Abstraction<ConsoleLogger>, to: ConsoleLogger): void', gave the following error.
     Argument of type 'typeof Car' is not assignable to parameter of type 'ConsoleLogger'.
       Property 'log' is missing in type 'typeof Car' but required in type 'ConsoleLogger'.
-test/spec.ts(78,20): error TS2345: Argument of type 'typeof Logger' is not assignable to parameter of type 'Newable<Logger>'.
+  Overload 3 of 4, '(from: Abstraction<ConsoleLogger>, to: FactoryFunction<ConsoleLogger>): Scope', gave the following error.
+    Argument of type 'typeof Car' is not assignable to parameter of type 'FactoryFunction<ConsoleLogger>'.
+      Type 'typeof Car' provides no match for the signature '(container: Container): ConsoleLogger'.
+test/spec.ts(103,20): error TS2345: Argument of type 'typeof Logger' is not assignable to parameter of type 'Newable<Logger>'.
   Cannot assign an abstract constructor type to a non-abstract constructor type.
-test/spec.ts(79,28): error TS2769: No overload matches this call.
-  Overload 1 of 3, '(from: Abstraction<Logger>, to: Newable<Logger>): Scope', gave the following error.
+test/spec.ts(104,28): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(from: Abstraction<Logger>, to: Newable<Logger>): Scope', gave the following error.
     Argument of type 'typeof Logger' is not assignable to parameter of type 'Newable<Logger>'.
-  Overload 2 of 3, '(from: Abstraction<Logger>, to: Logger): void', gave the following error.
+  Overload 2 of 4, '(from: Abstraction<Logger>, to: Logger): void', gave the following error.
     Argument of type 'typeof Logger' is not assignable to parameter of type 'Logger'.
       Property 'log' is missing in type 'typeof Logger' but required in type 'Logger'.
-test/spec.ts(82,28): error TS2769: No overload matches this call.
-  Overload 1 of 3, '(from: Abstraction<Logger>, to: Newable<Logger>): Scope', gave the following error.
+  Overload 3 of 4, '(from: Abstraction<Logger>, to: FactoryFunction<Logger>): Scope', gave the following error.
+    Argument of type 'typeof Logger' is not assignable to parameter of type 'FactoryFunction<Logger>'.
+      Type 'typeof Logger' provides no match for the signature '(container: Container): Logger'.
+test/spec.ts(107,28): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(from: Abstraction<Logger>, to: Newable<Logger>): Scope', gave the following error.
     Argument of type 'typeof Car' is not assignable to parameter of type 'Newable<Logger>'.
       Property 'log' is missing in type 'Car' but required in type 'Logger'.
-  Overload 2 of 3, '(from: Abstraction<Logger>, to: Logger): void', gave the following error.
+  Overload 2 of 4, '(from: Abstraction<Logger>, to: Logger): void', gave the following error.
     Argument of type 'typeof Car' is not assignable to parameter of type 'Logger'.
       Property 'log' is missing in type 'typeof Car' but required in type 'Logger'.
-test/spec.ts(83,28): error TS2769: No overload matches this call.
-  Overload 1 of 3, '(from: Abstraction<Logger>, to: Newable<Logger>): Scope', gave the following error.
+  Overload 3 of 4, '(from: Abstraction<Logger>, to: FactoryFunction<Logger>): Scope', gave the following error.
+    Argument of type 'typeof Car' is not assignable to parameter of type 'FactoryFunction<Logger>'.
+      Type 'typeof Car' provides no match for the signature '(container: Container): Logger'.
+test/spec.ts(108,28): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(from: Abstraction<Logger>, to: Newable<Logger>): Scope', gave the following error.
     Argument of type 'typeof BadImplementationLogger' is not assignable to parameter of type 'Newable<Logger>'.
       Construct signature return types 'BadImplementationLogger' and 'Logger' are incompatible.
         The types of 'log' are incompatible between these types.
           Type '(message: number) => void' is not assignable to type '(message: string) => void'.
             Types of parameters 'message' and 'message' are incompatible.
               Type 'string' is not assignable to type 'number'.
-  Overload 2 of 3, '(from: Abstraction<Logger>, to: Logger): void', gave the following error.
+  Overload 2 of 4, '(from: Abstraction<Logger>, to: Logger): void', gave the following error.
     Argument of type 'typeof BadImplementationLogger' is not assignable to parameter of type 'Logger'.
       Property 'log' is missing in type 'typeof BadImplementationLogger' but required in type 'Logger'.
-test/spec.ts(87,38): error TS2339: Property 'singletonScope' does not exist on type 'void'.
-test/spec.ts(88,38): error TS2339: Property 'resolutionScope' does not exist on type 'void'.
-test/spec.ts(89,39): error TS2339: Property 'singletonScope' does not exist on type 'void'.
-test/spec.ts(90,39): error TS2339: Property 'resolutionScope' does not exist on type 'void'.
-test/spec.ts(94,28): error TS2769: No overload matches this call.
-  Overload 1 of 3, '(from: Abstraction<Logger>, to: Newable<Logger>): Scope', gave the following error.
+  Overload 3 of 4, '(from: Abstraction<Logger>, to: FactoryFunction<Logger>): Scope', gave the following error.
+    Argument of type 'typeof BadImplementationLogger' is not assignable to parameter of type 'FactoryFunction<Logger>'.
+      Type 'typeof BadImplementationLogger' provides no match for the signature '(container: Container): Logger'.
+test/spec.ts(112,38): error TS2339: Property 'singletonScope' does not exist on type 'void'.
+test/spec.ts(113,38): error TS2339: Property 'resolutionScope' does not exist on type 'void'.
+test/spec.ts(114,39): error TS2339: Property 'singletonScope' does not exist on type 'void'.
+test/spec.ts(115,39): error TS2339: Property 'resolutionScope' does not exist on type 'void'.
+test/spec.ts(119,28): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(from: Abstraction<Logger>, to: Newable<Logger>): Scope', gave the following error.
     Argument of type '{ log: (message: string[]) => void; }' is not assignable to parameter of type 'Newable<Logger>'.
       Type '{ log: (message: string[]) => void; }' provides no match for the signature 'new (...args: any[]): Logger'.
-  Overload 2 of 3, '(from: Abstraction<Logger>, to: Logger): void', gave the following error.
+  Overload 2 of 4, '(from: Abstraction<Logger>, to: Logger): void', gave the following error.
     Argument of type '{ log: (message: string[]) => void; }' is not assignable to parameter of type 'Logger'.
       Types of property 'log' are incompatible.
         Type '(message: string[]) => void' is not assignable to type '(message: string) => void'.
           Types of parameters 'message' and 'message' are incompatible.
             Type 'string' is not assignable to type 'string[]'.
-test/spec.ts(95,35): error TS2769: No overload matches this call.
-  Overload 1 of 3, '(from: Abstraction<ConsoleLogger>, to: Newable<ConsoleLogger>): Scope', gave the following error.
+  Overload 3 of 4, '(from: Abstraction<Logger>, to: FactoryFunction<Logger>): Scope', gave the following error.
+    Argument of type '{ log: (message: string[]) => void; }' is not assignable to parameter of type 'FactoryFunction<Logger>'.
+      Type '{ log: (message: string[]) => void; }' provides no match for the signature '(container: Container): Logger'.
+test/spec.ts(120,35): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(from: Abstraction<ConsoleLogger>, to: Newable<ConsoleLogger>): Scope', gave the following error.
     Argument of type '{ log: (message: string[]) => void; }' is not assignable to parameter of type 'Newable<ConsoleLogger>'.
       Type '{ log: (message: string[]) => void; }' provides no match for the signature 'new (...args: any[]): ConsoleLogger'.
-  Overload 2 of 3, '(from: Abstraction<ConsoleLogger>, to: ConsoleLogger): void', gave the following error.
+  Overload 2 of 4, '(from: Abstraction<ConsoleLogger>, to: ConsoleLogger): void', gave the following error.
     Argument of type '{ log: (message: string[]) => void; }' is not assignable to parameter of type 'ConsoleLogger'.
       Types of property 'log' are incompatible.
         Type '(message: string[]) => void' is not assignable to type '(message: string) => void'.
           Types of parameters 'message' and 'message' are incompatible.
             Type 'string' is not assignable to type 'string[]'.
-test/spec.ts(96,25): error TS2769: No overload matches this call.
-  Overload 1 of 3, '(from: Abstraction<Car>, to: Newable<Car>): Scope', gave the following error.
+  Overload 3 of 4, '(from: Abstraction<ConsoleLogger>, to: FactoryFunction<ConsoleLogger>): Scope', gave the following error.
+    Argument of type '{ log: (message: string[]) => void; }' is not assignable to parameter of type 'FactoryFunction<ConsoleLogger>'.
+      Type '{ log: (message: string[]) => void; }' provides no match for the signature '(container: Container): ConsoleLogger'.
+test/spec.ts(121,25): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(from: Abstraction<Car>, to: Newable<Car>): Scope', gave the following error.
     Argument of type '{ log: (message: string[]) => void; }' is not assignable to parameter of type 'Newable<Car>'.
       Type '{ log: (message: string[]) => void; }' provides no match for the signature 'new (...args: any[]): Car'.
-  Overload 2 of 3, '(from: Abstraction<Car>, to: Car): void', gave the following error.
+  Overload 2 of 4, '(from: Abstraction<Car>, to: Car): void', gave the following error.
     Argument of type '{ log: (message: string[]) => void; }' is not assignable to parameter of type 'Car'.
       Property 'drive' is missing in type '{ log: (message: string[]) => void; }' but required in type 'Car'.
+  Overload 3 of 4, '(from: Abstraction<Car>, to: FactoryFunction<Car>): Scope', gave the following error.
+    Argument of type '{ log: (message: string[]) => void; }' is not assignable to parameter of type 'FactoryFunction<Car>'.
+      Type '{ log: (message: string[]) => void; }' provides no match for the signature '(container: Container): Car'.
+test/spec.ts(124,1): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(from: Abstraction<Logger>, to: Newable<Logger>): Scope', gave the following error.
+    Argument of type '() => Car' is not assignable to parameter of type 'Newable<Logger>'.
+      Type '() => Car' provides no match for the signature 'new (...args: any[]): Logger'.
+  Overload 2 of 4, '(from: Abstraction<Logger>, to: Logger): void', gave the following error.
+    Argument of type '() => Car' is not assignable to parameter of type 'Logger'.
+      Property 'log' is missing in type '() => Car' but required in type 'Logger'.
+  Overload 3 of 4, '(from: Abstraction<Logger>, to: FactoryFunction<Logger>): Scope', gave the following error.
+    Type 'Car' is not assignable to type 'Logger'.
+test/spec.ts(126,28): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(from: Abstraction<Logger>, to: Newable<Logger>): Scope', gave the following error.
+    Argument of type '() => { log: (message: string) => void; } | "this shouldnt happen"' is not assignable to parameter of type 'Newable<Logger>'.
+      Type '() => { log: (message: string) => void; } | "this shouldnt happen"' provides no match for the signature 'new (...args: any[]): Logger'.
+  Overload 2 of 4, '(from: Abstraction<Logger>, to: Logger): void', gave the following error.
+    Argument of type '() => { log: (message: string) => void; } | "this shouldnt happen"' is not assignable to parameter of type 'Logger'.
+      Property 'log' is missing in type '() => { log: (message: string) => void; } | "this shouldnt happen"' but required in type 'Logger'.
+  Overload 3 of 4, '(from: Abstraction<Logger>, to: FactoryFunction<Logger>): Scope', gave the following error.
+    Argument of type '() => { log: (message: string) => void; } | "this shouldnt happen"' is not assignable to parameter of type 'FactoryFunction<Logger>'.
+      Type '{ log: (message: string) => void; } | "this shouldnt happen"' is not assignable to type 'Logger'.
+        Type '"this shouldnt happen"' is not assignable to type 'Logger'.
+test/spec.ts(135,35): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(from: Abstraction<ConsoleLogger>, to: Newable<ConsoleLogger>): Scope', gave the following error.
+    Argument of type '() => { log: (message: string[]) => void; }' is not assignable to parameter of type 'Newable<ConsoleLogger>'.
+      Type '() => { log: (message: string[]) => void; }' provides no match for the signature 'new (...args: any[]): ConsoleLogger'.
+  Overload 2 of 4, '(from: Abstraction<ConsoleLogger>, to: ConsoleLogger): void', gave the following error.
+    Argument of type '() => { log: (message: string[]) => void; }' is not assignable to parameter of type 'ConsoleLogger'.
+      Property 'log' is missing in type '() => { log: (message: string[]) => void; }' but required in type 'ConsoleLogger'.
+  Overload 3 of 4, '(from: Abstraction<ConsoleLogger>, to: FactoryFunction<ConsoleLogger>): Scope', gave the following error.
+    Argument of type '() => { log: (message: string[]) => void; }' is not assignable to parameter of type 'FactoryFunction<ConsoleLogger>'.
+      Call signature return types '{ log: (message: string[]) => void; }' and 'ConsoleLogger' are incompatible.
+        The types of 'log' are incompatible between these types.
+          Type '(message: string[]) => void' is not assignable to type '(message: string) => void'.
+            Types of parameters 'message' and 'message' are incompatible.
+              Type 'string' is not assignable to type 'string[]'.
+test/spec.ts(140,35): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(from: Abstraction<ConsoleLogger>, to: Newable<ConsoleLogger>): Scope', gave the following error.
+    Argument of type '(c: number) => ConsoleLogger' is not assignable to parameter of type 'Newable<ConsoleLogger>'.
+      Type '(c: number) => ConsoleLogger' provides no match for the signature 'new (...args: any[]): ConsoleLogger'.
+  Overload 2 of 4, '(from: Abstraction<ConsoleLogger>, to: ConsoleLogger): void', gave the following error.
+    Argument of type '(c: number) => ConsoleLogger' is not assignable to parameter of type 'ConsoleLogger'.
+      Property 'log' is missing in type '(c: number) => ConsoleLogger' but required in type 'ConsoleLogger'.
+  Overload 3 of 4, '(from: Abstraction<ConsoleLogger>, to: FactoryFunction<ConsoleLogger>): Scope', gave the following error.
+    Argument of type '(c: number) => ConsoleLogger' is not assignable to parameter of type 'FactoryFunction<ConsoleLogger>'.
+      Types of parameters 'c' and 'container' are incompatible.
+        Type 'Container' is not assignable to type 'number'.

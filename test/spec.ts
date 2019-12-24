@@ -66,6 +66,31 @@ container.register(Logger, myLogger2);
 container.register(ConsoleLogger, myLogger);
 container.register(ConsoleLogger, myLogger2);
 
+// Factory registrations would be nice. Factory resolutions can be scoped and
+// optionally have full access to the container if desired.
+container.register(Logger, () => new ConsoleLogger());
+container.register(ConsoleLogger, () => new ConsoleLogger());
+container.register(Logger, (c: Container) => new ConsoleLogger());
+
+container.register(ConsoleLogger, (c: Container) => {
+    return { log: (message: string) => { console.error(message); } };
+});
+
+container.register(Logger, () => {
+    if (Math.random() > 0.5) {
+        return myLogger;
+    }
+
+    return myLogger2;
+});
+
+container.register(Logger, () => new ConsoleLogger()).singletonScope();
+container.register(Logger, () => new ConsoleLogger()).resolutionScope();
+container.register(ConsoleLogger, () => new ConsoleLogger()).singletonScope();
+container.register(ConsoleLogger, () => new ConsoleLogger()).resolutionScope();
+container.register(Logger, (c: Container) => new ConsoleLogger()).singletonScope();
+container.register(Logger, (c: Container) => new ConsoleLogger()).resolutionScope();
+
 /**
  * These should not be fine.
  */
@@ -94,3 +119,22 @@ const myBadLogger = { log: (message: string[]) => { console.error(message); } };
 container.register(Logger, myBadLogger);
 container.register(ConsoleLogger, myBadLogger);
 container.register(Car, myBadLogger);
+
+// Factory functions must return the right shape - always.
+container.register(Logger, () => new Car());
+
+container.register(Logger, () => {
+    if (Math.random() > 0.5) {
+        return myLogger;
+    }
+
+    return 'this shouldnt happen';
+});
+
+
+container.register(ConsoleLogger, () => {
+    return { log: (message: string[]) => { console.error(message); } };
+});
+
+// Factory functions have access to the container and nothing else.
+container.register(ConsoleLogger, (c: number) => new ConsoleLogger());
