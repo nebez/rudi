@@ -4,13 +4,12 @@ export function injectable(): ClassDecorator {
 
 type Newable<T> = { new (...args: any[]): T };
 type Abstraction<T> = Function & { prototype: T };
+type FactoryFunction<T> = (container: Container) => T;
 
 interface Scope {
     singletonScope(): void;
     resolutionScope(): void;
 }
-
-type FactoryFunction<T> = (container: Container) => T;
 
 export interface Container {
     register<To>(to: Newable<To>): Scope;

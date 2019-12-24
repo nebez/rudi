@@ -120,6 +120,10 @@ container.register(Logger, myBadLogger);
 container.register(ConsoleLogger, myBadLogger);
 container.register(Car, myBadLogger);
 
+// You can't attach concretions to interfaces. We don't like that kind of magic
+interface ILogger extends Logger { }
+container.register(ILogger, ConsoleLogger);
+
 // Factory functions must return the right shape - always.
 container.register(Logger, () => new Car());
 
