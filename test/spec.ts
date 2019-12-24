@@ -26,9 +26,13 @@ class Car {
 
 let container: Container;
 
-// These should be fine. We can bind a concrete class alone, or a
-// concrete class to another concrete class of the same shape. We
-// can also bind abstractions to their concrete implementations.
+/**
+ * These should be fine.
+ */
+
+// We can bind a concrete class alone, or a concrete class to another concrete
+// class of the same shape. We can also bind abstractions to their concrete
+// implementations.
 container.register(ConsoleLogger);
 container.register(ConsoleLogger, ConsoleLogger);
 
@@ -37,30 +41,51 @@ container.register(Car, Car);
 
 container.register(Logger, ConsoleLogger);
 
-// All of the above should also work for singleton and request scopes.
-container.register(ConsoleLogger).resolutionScope();
+// Self-binding and abstract-to-concrete bindings can have different
+// scopes: singleton and request.
 container.register(ConsoleLogger).singletonScope();
-container.register(ConsoleLogger, ConsoleLogger).resolutionScope();
+container.register(ConsoleLogger).resolutionScope();
 container.register(ConsoleLogger, ConsoleLogger).singletonScope();
+container.register(ConsoleLogger, ConsoleLogger).resolutionScope();
 
-container.register(Car).resolutionScope();
 container.register(Car).singletonScope();
-container.register(Car, Car).resolutionScope();
+container.register(Car).resolutionScope();
 container.register(Car, Car).singletonScope();
+container.register(Car, Car).resolutionScope();
 
-container.register(Logger, ConsoleLogger).resolutionScope();
 container.register(Logger, ConsoleLogger).singletonScope();
+container.register(Logger, ConsoleLogger).resolutionScope();
 
-// These should throw. You can't bind a concrete class to another
-// concrete class of a different shape.
+// We should also enable instance registration.
+const myLogger = { log: (message: string) => { console.error(message); } };
+const myLogger2 = new ConsoleLogger();
+
+container.register(Logger, myLogger);
+container.register(Logger, myLogger2);
+
+/**
+ * These should not be fine.
+ */
+
+// You can't bind a concrete class to another concretion of a different shape.
 container.register(Car, ConsoleLogger);
 container.register(ConsoleLogger, Car);
 
-// These should throw. You can't bind an abstract class to itself.
+// You can't bind an abstract class to itself.
 container.register(Logger);
 container.register(Logger, Logger);
 
-// This should also throw because you can't bind an abstraction to
-// a concretion of the wrong shape.
+// You can't bind an abstraction to a concretion of the wrong shape.
 container.register(Logger, Car);
 container.register(Logger, BadImplementationLogger);
+
+// You shouldn't be able to change the scope of an instance binding. These
+// should all be errors.
+container.register(Logger, myLogger).singletonScope();
+container.register(Logger, myLogger).resolutionScope();
+container.register(Logger, myLogger2).singletonScope();
+container.register(Logger, myLogger2).resolutionScope();
+
+// You can't attach a wrong shape to an abstraction.
+const myBadLogger = { log: (message: string[]) => { console.error(message); } };
+container.register(Logger, myBadLogger);
