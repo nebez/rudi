@@ -24,8 +24,7 @@ class Car {
     }
 }
 
-// @ts-ignore
-let container: Container = {};
+let container: Container;
 
 // These should be fine. We can bind a concrete class alone, or a
 // concrete class to another concrete class of the same shape. We
