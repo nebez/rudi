@@ -12,7 +12,9 @@
     "clean": "rimraf ./dist",
     "lint": "eslint --ext \".ts\" \"./src\" \"./test\"",
     "lint:fix": "eslint --fix --ext \".ts\" \"./src\" \"./test\"",
-    "test": "jest ./test/*"
+    "test": "jest ./test/*.test.ts",
+    "test:spec": "(tsc --noEmit test/spec.ts || exit 0) > test/spec.actual.txt && diff test/spec.expected.txt test/spec.actual.txt",
+    "update-spec": "(tsc --noEmit test/spec.ts || exit 0) > test/spec.expected.txt"
   },
   "repository": {
     "type": "git",
