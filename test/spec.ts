@@ -1,6 +1,6 @@
 // This file is type-checked against the compiler. You can't execute it
 // because we're testing our specification, not the implementation.
-import { Container } from '../src/everything';
+import { Container } from '../src/index';
 
 abstract class Logger {
     abstract log(message: string): void;
