@@ -37,6 +37,20 @@ container.register(Car, Car);
 
 container.register(Logger, ConsoleLogger);
 
+// All of the above should also work for singleton and request scopes.
+container.register(ConsoleLogger).resolutionScope();
+container.register(ConsoleLogger).singletonScope();
+container.register(ConsoleLogger, ConsoleLogger).resolutionScope();
+container.register(ConsoleLogger, ConsoleLogger).singletonScope();
+
+container.register(Car).resolutionScope();
+container.register(Car).singletonScope();
+container.register(Car, Car).resolutionScope();
+container.register(Car, Car).singletonScope();
+
+container.register(Logger, ConsoleLogger).resolutionScope();
+container.register(Logger, ConsoleLogger).singletonScope();
+
 // These should throw. You can't bind a concrete class to another
 // concrete class of a different shape.
 container.register(Car, ConsoleLogger);
