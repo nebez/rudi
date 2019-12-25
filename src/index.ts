@@ -16,4 +16,5 @@ export interface Container {
     register<From, To extends From>(from: Abstraction<From>, to: Newable<To>): Scope;
     register<From, To extends From>(from: Abstraction<From>, to: To): void;
     register<From, To extends From>(from: Abstraction<From>, to: FactoryFunction<To>): Scope;
+    resolve<Token>(token: Abstraction<Token>): Token;
 }

@@ -91,6 +91,12 @@ container.register(ConsoleLogger, () => new ConsoleLogger()).resolutionScope();
 container.register(Logger, (c: Container) => new ConsoleLogger()).singletonScope();
 container.register(Logger, (c: Container) => new ConsoleLogger()).resolutionScope();
 
+// Resolving any abstract or concrete types is good
+container.resolve(Logger);
+container.resolve(ConsoleLogger);
+container.resolve(BadImplementationLogger);
+container.resolve(Car);
+
 /**
  * These should not be fine.
  */
@@ -142,3 +148,7 @@ container.register(ConsoleLogger, () => {
 
 // Factory functions have access to the container and nothing else.
 container.register(ConsoleLogger, (c: number) => new ConsoleLogger());
+
+// Attempting to resolve anything other than abstract or concrete classes = bad
+container.resolve(myBadLogger);
+container.resolve<ILogger>(ILogger);
