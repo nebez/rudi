@@ -60,23 +60,23 @@ container.register(Logger, ConsoleLogger).resolutionScope();
 const myLogger = { log: (message: string) => { console.error(message); } };
 const myLogger2 = new ConsoleLogger();
 
-container.register(Logger, myLogger);
-container.register(Logger, myLogger2);
+container.instance(Logger, myLogger);
+container.instance(Logger, myLogger2);
 
-container.register(ConsoleLogger, myLogger);
-container.register(ConsoleLogger, myLogger2);
+container.instance(ConsoleLogger, myLogger);
+container.instance(ConsoleLogger, myLogger2);
 
 // Factory registrations would be nice. Factory resolutions can be scoped and
 // optionally have full access to the container if desired.
-container.register(Logger, () => new ConsoleLogger());
-container.register(ConsoleLogger, () => new ConsoleLogger());
-container.register(Logger, (c: Container) => new ConsoleLogger());
+container.factory(Logger, () => new ConsoleLogger());
+container.factory(ConsoleLogger, () => new ConsoleLogger());
+container.factory(Logger, (c: Container) => new ConsoleLogger());
 
-container.register(ConsoleLogger, (c: Container) => {
+container.factory(ConsoleLogger, (c: Container) => {
     return { log: (message: string) => { console.error(message); } };
 });
 
-container.register(Logger, () => {
+container.factory(Logger, () => {
     if (Math.random() > 0.5) {
         return myLogger;
     }
@@ -84,12 +84,12 @@ container.register(Logger, () => {
     return myLogger2;
 });
 
-container.register(Logger, () => new ConsoleLogger()).singletonScope();
-container.register(Logger, () => new ConsoleLogger()).resolutionScope();
-container.register(ConsoleLogger, () => new ConsoleLogger()).singletonScope();
-container.register(ConsoleLogger, () => new ConsoleLogger()).resolutionScope();
-container.register(Logger, (c: Container) => new ConsoleLogger()).singletonScope();
-container.register(Logger, (c: Container) => new ConsoleLogger()).resolutionScope();
+container.factory(Logger, () => new ConsoleLogger()).singletonScope();
+container.factory(Logger, () => new ConsoleLogger()).resolutionScope();
+container.factory(ConsoleLogger, () => new ConsoleLogger()).singletonScope();
+container.factory(ConsoleLogger, () => new ConsoleLogger()).resolutionScope();
+container.factory(Logger, (c: Container) => new ConsoleLogger()).singletonScope();
+container.factory(Logger, (c: Container) => new ConsoleLogger()).resolutionScope();
 
 // Resolving any abstract or concrete types is good
 container.resolve(Logger);
@@ -115,25 +115,25 @@ container.register(Logger, BadImplementationLogger);
 
 // You shouldn't be able to change the scope of an instance binding. These
 // should all be errors.
-container.register(Logger, myLogger).singletonScope();
-container.register(Logger, myLogger).resolutionScope();
-container.register(Logger, myLogger2).singletonScope();
-container.register(Logger, myLogger2).resolutionScope();
+container.instance(Logger, myLogger).singletonScope();
+container.instance(Logger, myLogger).resolutionScope();
+container.instance(Logger, myLogger2).singletonScope();
+container.instance(Logger, myLogger2).resolutionScope();
 
 // You can't attach a wrong shape to an abstraction.
 const myBadLogger = { log: (message: string[]) => { console.error(message); } };
-container.register(Logger, myBadLogger);
-container.register(ConsoleLogger, myBadLogger);
-container.register(Car, myBadLogger);
+container.instance(Logger, myBadLogger);
+container.instance(ConsoleLogger, myBadLogger);
+container.instance(Car, myBadLogger);
 
 // You can't attach concretions to interfaces. We don't like that kind of magic
 interface ILogger extends Logger { }
 container.register(ILogger, ConsoleLogger);
 
 // Factory functions must return the right shape - always.
-container.register(Logger, () => new Car());
+container.factory(Logger, () => new Car());
 
-container.register(Logger, () => {
+container.factory(Logger, () => {
     if (Math.random() > 0.5) {
         return myLogger;
     }
@@ -142,12 +142,12 @@ container.register(Logger, () => {
 });
 
 
-container.register(ConsoleLogger, () => {
+container.factory(ConsoleLogger, () => {
     return { log: (message: string[]) => { console.error(message); } };
 });
 
 // Factory functions have access to the container and nothing else.
-container.register(ConsoleLogger, (c: number) => new ConsoleLogger());
+container.factory(ConsoleLogger, (c: number) => new ConsoleLogger());
 
 // Attempting to resolve anything other than abstract or concrete classes = bad
 container.resolve(myBadLogger);

@@ -14,7 +14,7 @@ interface Scope {
 export interface Container {
     register<To>(to: Newable<To>): Scope;
     register<From, To extends From>(from: Abstraction<From>, to: Newable<To>): Scope;
-    register<From, To extends From>(from: Abstraction<From>, to: To): void;
-    register<From, To extends From>(from: Abstraction<From>, to: FactoryFunction<To>): Scope;
+    instance<From, To extends From>(from: Abstraction<From>, to: To): void;
+    factory<From, To extends From>(from: Abstraction<From>, to: FactoryFunction<To>): Scope;
     resolve<Token>(token: Abstraction<Token>): Token;
 }
