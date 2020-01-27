@@ -51,15 +51,15 @@
   "jest": {
     "rootDir": ".",
     "clearMocks": true,
-    "coverageDirectory": "coverage",
+    "collectCoverage": true,
+    "coverageDirectory": "<rootDir>/test/coverage",
     "collectCoverageFrom": [
-      "src/**/*.ts"
+      "<rootDir>/src/**/*.ts"
     ],
     "coveragePathIgnorePatterns": [
       "/dist/",
       "/node_modules/",
       "types\\.ts",
-      "index\\.ts",
       ".+\\.d\\.ts"
     ],
     "globals": {
