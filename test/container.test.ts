@@ -28,7 +28,8 @@ class Driver {
 }
 
 class DriverNoAnnotation {
-    constructor(_vehicle: Vehicle) {
+    constructor(vehicle: Vehicle) {
+        vehicle.drive();
     }
 }
 
@@ -71,7 +72,7 @@ describe('container', () => {
         expect(() => {
             const container = new FirstContainer();
             container.register(DriverNoAnnotation);
-        }).toThrowError('Attempting to register DriverNoAnnotation that has constructor args');
+        }).toThrowError('Attempting to register DriverNoAnnotation with constructor args without an annotation');
     });
 
     it('should not throw errors when trying to register un-annotated classes without constructor args', () => {

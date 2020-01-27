@@ -55,7 +55,7 @@ export class FirstContainer implements Container {
         }
 
         if (registration.class.length >= 1 && this.getParams(registration.class) == undefined) {
-            throw new Error(`Attempting to register ${registration.class.name} that has constructor args without an annotation`);
+            throw new Error(`Attempting to register ${registration.class.name} with constructor args without an annotation.`);
         }
 
         this.registrations.set(args[0], {
@@ -70,8 +70,6 @@ export class FirstContainer implements Container {
         const registration = this.registrations.get(token);
 
         if (registration == undefined) {
-            // todo - can we just construct it if it's newable and has no args?
-            // return new (token as any)();
             throw new Error(`No registration found for ${token.name}. Did you forget to add it to the container?`);
         }
 
@@ -88,7 +86,6 @@ export class FirstContainer implements Container {
         const params = this.getParams(forClass);
 
         if (params == undefined) {
-            // throw new Error('Missing something for ' + forClass.name);
             return [];
         }
 
