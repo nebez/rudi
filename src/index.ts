@@ -86,6 +86,9 @@ export class FirstContainer implements Container {
         const params = this.getParams(forClass);
 
         if (params == undefined) {
+            if (forClass.length >= 1) {
+                throw new Error(`This shouldn't happen, but ${forClass.name} required constructing but wasn't annotated`);
+            }
             return [];
         }
 
