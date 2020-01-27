@@ -27,6 +27,11 @@ class Driver {
     }
 }
 
+class DriverNoAnnotation {
+    constructor(_vehicle: Vehicle) {
+    }
+}
+
 describe('container', () => {
     it('should register and resolve concrete classes', () => {
         const container = new FirstContainer();
@@ -50,7 +55,7 @@ describe('container', () => {
 
         expect(() => {
             container.resolve(Driver);
-        }).toThrowError('No registration found for Vehicle')
+        }).toThrowError('No registration found for Vehicle');
     });
 
     it('should register and resolve abstract implementations with concrete constructor args', () => {
@@ -60,5 +65,19 @@ describe('container', () => {
 
         const driver = container.resolve(Driver);
         expect(driver.drive()).toBe(true);
+    });
+
+    it('should throw errors when trying to register un-annotated classes with constructor args', () => {
+        expect(() => {
+            const container = new FirstContainer();
+            container.register(DriverNoAnnotation);
+        }).toThrowError('Attempting to register DriverNoAnnotation that has constructor args');
+    });
+
+    it('should not throw errors when trying to register un-annotated classes without constructor args', () => {
+        expect(() => {
+            const container = new FirstContainer();
+            container.register(Car);
+        }).not.toThrow();
     });
 });

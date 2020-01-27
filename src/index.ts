@@ -1,6 +1,4 @@
-export function injectable(): ClassDecorator {
-    return () => {};
-}
+export function injectable(): ClassDecorator { return () => {} }
 
 type Newable<T> = { new (...args: any[]): T };
 type Abstraction<T> = Function & { prototype: T };
@@ -56,6 +54,10 @@ export class FirstContainer implements Container {
             registration = { token: args[0], class: args[1] };
         }
 
+        if (registration.class.length >= 1 && this.getParams(registration.class) == undefined) {
+            throw new Error(`Attempting to register ${registration.class.name} that has constructor args without an annotation`);
+        }
+
         this.registrations.set(args[0], {
             type: 'abstract',
             ...registration,
@@ -70,7 +72,7 @@ export class FirstContainer implements Container {
         if (registration == undefined) {
             // todo - can we just construct it if it's newable and has no args?
             // return new (token as any)();
-            throw new Error(`No registration found for ${token.name}`);
+            throw new Error(`No registration found for ${token.name}. Did you forget to add it to the container?`);
         }
 
         if (registration.type === 'factory' || registration.type === 'instance') {
@@ -83,12 +85,17 @@ export class FirstContainer implements Container {
     }
 
     protected createConstructorArguments<T>(forClass: Newable<T>): any[] {
-        const params = Reflect.getMetadata('design:paramtypes', forClass);
+        const params = this.getParams(forClass);
 
         if (params == undefined) {
+            // throw new Error('Missing something for ' + forClass.name);
             return [];
         }
 
         return params.map((x: Abstraction<T>) => this.resolve(x));
+    }
+
+    protected getParams<T>(forClass: Newable<T>): any[] | undefined {
+        return Reflect.getMetadata('design:paramtypes', forClass);
     }
 }
